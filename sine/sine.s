@@ -14,63 +14,51 @@ default_answer = 0x312d
 ans_len        = 8
 
 .section .data
-# if you need some data, put it here
 var:
 .align  8
 .space  100
 
 zero_point:
- .asciz "0.00000"
- .asciz "0.09983"
- .asciz "0.19866"
- .asciz "0.29552"
- .asciz "0.38941"
- .asciz "0.47942"
- .asciz "0.56464"
- .asciz "0.64421"
- .asciz "0.71735"
- .asciz "0.78332"
+ .asciz "0.04998"
+ .asciz "0.14944"
+ .asciz "0.24740"
+ .asciz "0.34290"
+ .asciz "0.43497"
+ .asciz "0.52269"
+ .asciz "0.60519"
+ .asciz "0.68164"
+ .asciz "0.75128"
+ .asciz "0.81342"
 
 one_point:
- .asciz "0.84147"
- .asciz "0.89120"
- .asciz "0.93203"
- .asciz "0.96355"
- .asciz "0.98544"
- .asciz "0.99749"
+ .asciz "0.86742"
+ .asciz "0.91276"
+ .asciz "0.94899"
+ .asciz "0.97572"
+ .asciz "0.99271"
+ .asciz "0.99917"
 
 .section .text
 
-# Sine
-#   Params
-#   a1 -- input buffer will contain string with the argument
-#   a2 -- output string buffer for the string result
 sine:
     fin
 
-    # Load input address to the pointer
     mv   a3, a1
 
-    # Load first digit
     lb   t0, 0(a3)
     addi t0, t0, -48
 
-    # Move pointer to the next char
     addi a3, a3, 1
 
-    # Load point
     lb   t1, 0(a3)
     li   t2, '.'
     bne  t1, t2, erret
 
-    # Move pointer to the next char
     addi a3, a3, 1
 
-    # Load second digit
     lb   t1, 0(a3)
     addi t1, t1, -48
 
-    # Check the value of the first digit
     li   t2, 0
     beq  t2, t0, first_digit_zero
     li   t2, 1

@@ -45,12 +45,3 @@ _start:
     li  a0, 0
     li  a7, exit
     ecall
-
-	la	a1, input
-	la	a2, output
-	call 	sine
-
-
-	li	a0, 0
-	li	a7, exit
-	ecall
